@@ -49,4 +49,39 @@ public class StatementPrinter
         result += String.Format("You earned {0} credits\n", volumeCredits);
         return result;
     }
+    public int CalculateAmount(Performance perf, Play play)
+    {
+        int lines = play.Lines;
+        if (lines < 1000)
+            lines = 1000;
+        if (lines > 4000)
+            lines = 4000;
+
+        int amount = lines * 10;
+        switch (play.Type)
+        {
+            case "tragedy":
+                if (perf.Audience > 30)
+                    amount += 1000 * (perf.Audience - 30);
+                break;
+            case "comedy":
+                if (perf.Audience > 20)
+                    amount += 10000 + 500 * (perf.Audience - 20);
+                amount += 300 * perf.Audience;
+                break;
+            default:
+                throw new Exception("unknown type: " + play.Type);
+        }
+        return amount;
+    }
+
+    // Método público para cálculo dos créditos de volume
+    public int CalculateVolumeCredits(Performance perf, Play play)
+    {
+        int credits = Math.Max(perf.Audience - 30, 0);
+        if (play.Type == "comedy")
+            credits += (int)Math.Floor((decimal)perf.Audience / 5);
+        return credits;
+    }
 }
+
