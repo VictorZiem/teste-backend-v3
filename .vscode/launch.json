@@ -13,7 +13,6 @@
             "args": [],
             "cwd": "${workspaceFolder}/TheatricalPlayersRefactoringKata.Tests",
             "console": "internalConsole",
-            "targetArchitecture": "arm64",
             "stopAtEntry": false
         },
         {
